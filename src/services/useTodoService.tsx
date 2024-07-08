@@ -28,7 +28,12 @@ const useTodoService = () => {
   const addTodo = async (title: string) => {
     try {
       if (title.trim() === '') return;
-      const response = await axios.post(API_URL, { title });
+      const newTodo: Todo = {
+        id: String(new Date().getTime()),
+        title: title,
+        isDone: false
+      };
+      const response = await axios.post(API_URL, newTodo);
       setTodos([...todos, response.data]);
     } catch (error: any) {
       setError("Error fetching todos on method addTodo!");

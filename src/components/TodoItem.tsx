@@ -25,7 +25,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onClick, onDelete }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <TodoCheckbox todo={todo} onClick={handleCheckedTodo} />
+      <TodoCheckbox todo={todo} onClick={handleCheckedTodo} checked={todo.isDone} />
       <span className={`todo-title ${todo.isDone ? 'completed' : ''}`}>
         {todo.title}
       </span>
