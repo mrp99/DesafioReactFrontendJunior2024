@@ -1,0 +1,14 @@
+.todo-icon-delete {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.todo-icon-delete:hover {
+  color: red;
+  /* Cor vermelha ao passar o mouse */
+}
+
+.delete-icon {
+  font-size: 18px;
+  /* Tamanho do ícone */
+}

@@ -1,0 +1,23 @@
+.item {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ededed;
+  font-size: 24px;
+}
+
+.checkbox {
+  margin-right: 10px;
+}
+
+.todo-title {
+  flex: 1;
+  padding-left: 10px;
+  text-decoration: none;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
