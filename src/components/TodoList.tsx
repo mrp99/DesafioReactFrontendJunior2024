@@ -1,19 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TodoItem from './TodoItem';
 import useTodoService from '../services/useTodoService';
 import TodoAdd from './TodoAdd';
 
 
 const TodoList: React.FC = () => {
-  const { todos, loading, error, checkTodo, deleteTodo } = useTodoService();
-  const [selectAll, setSelectAll] = useState(false);
-
-  const handleSelectAll = () => {
-    setSelectAll(!selectAll);
-    todos.forEach(todo => {
-      if (todo.isDone !== !selectAll) checkTodo(todo.id);
-    });
-  };
+  const { todos, loading, error, addTodo, checkTodo, deleteTodo, markAllAsDone } = useTodoService();
 
   const handleCheckedTodo = (id: string) => checkTodo(id);
   const handleDeleteTodo = (id: string) => deleteTodo(id);
@@ -24,14 +16,13 @@ const TodoList: React.FC = () => {
   return (
     <section className="todo-list">
       <ul className="list">
-        <TodoAdd onSelectAll={handleSelectAll} />
+        <TodoAdd markAllAsDone={markAllAsDone} addTodo={addTodo} />
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}
             onClick={handleCheckedTodo}
             onDelete={() => handleDeleteTodo(todo.id)}
-
           />
         ))}
       </ul>

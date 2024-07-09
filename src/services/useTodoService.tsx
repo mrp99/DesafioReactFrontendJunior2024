@@ -63,7 +63,26 @@ const useTodoService = () => {
     }
   };
 
-  return { todos, loading, error, addTodo, checkTodo, deleteTodo };
+  const markAllAsDone = async () => {
+    try {
+      const areAllDone = todos.every(todo => todo.isDone);
+
+      const updatedTodos = await Promise.all(
+        todos.map(async todo => {
+          const updatedTodo = { ...todo, isDone: !areAllDone };
+          await axios.put(`${API_URL}/${todo.id}`, updatedTodo);
+          return updatedTodo;
+        })
+      );
+
+      setTodos(updatedTodos);
+
+    } catch (error) {
+      setError('Error marking all todos as done');
+    }
+  };
+
+  return { todos, loading, error, addTodo, checkTodo, deleteTodo, markAllAsDone };
 };
 
 export default useTodoService;

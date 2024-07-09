@@ -1,15 +1,14 @@
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { useState } from 'react';
 import "../styles/TodoAdd.css";
-import useTodoService from '../services/useTodoService';
 
 
 interface TodoAddProps {
-  onSelectAll: () => void;
+  markAllAsDone: () => Promise<void>;
+  addTodo: (title: string) => Promise<void>;
 }
 
-const TodoAdd: React.FC<TodoAddProps> = ({ onSelectAll }) => {
-  const { addTodo } = useTodoService();
+const TodoAdd: React.FC<TodoAddProps> = ({ markAllAsDone, addTodo }) => {
   const [newTodoTitle, setNewTodoTitle] = useState('');
 
 
@@ -24,10 +23,13 @@ const TodoAdd: React.FC<TodoAddProps> = ({ onSelectAll }) => {
     }
   };
 
+  const handleSelectAll = async () => await markAllAsDone();
+
+
 
   return (
     <div className="todo-add">
-      <RiArrowDropDownLine className='add-icon' onClick={onSelectAll} />
+      <RiArrowDropDownLine className='add-icon' onClick={handleSelectAll} />
       <input
         type="text"
         placeholder="What needs to be done?"
